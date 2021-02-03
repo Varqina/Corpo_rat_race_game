@@ -1,3 +1,5 @@
+import random
+from tkinter import messagebox
 from turtle import Turtle, Screen
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
@@ -21,7 +23,13 @@ for turtle in list_of_turtles:
     turtle.penup()
     turtle.goto(x=max_width, y=height)
     height = height - distance
-
-while True:
-    for turtle
+user_bet = screen.textinput(title="Make your bet", prompt="provide turtle color")
+winning_color = ''
+while winning_color == '':
+    for turtle in list_of_turtles:
+        turtle.forward(random.randint(0, 10))
+        if int(turtle.position()[0]) >= 230:
+            winning_color = turtle.pencolor()
+            break
+messagebox.showinfo("The end", f"winner is {winning_color}")
 screen.exitonclick()
