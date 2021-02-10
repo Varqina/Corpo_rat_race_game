@@ -1,14 +1,22 @@
 import random
 from tkinter import messagebox
-from turtle import Turtle, Screen
+from turtle import Screen, Turtle
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 list_of_turtles = []
+rat_shape = ((0, 0), (0, 10), (-10, 20), (-10, 30), (-5, 35), (-10, 35), (-5, 40), (1, 47), (1, 0))
+
 
 screen = Screen()
 screen.setup(width=500, height=400)
+screen.register_shape("rat", rat_shape)
+
+
+
+
+
 for color in colors:
-    turtle_to_be_added = Turtle(shape='turtle')
+    turtle_to_be_added = Turtle("rat")
     turtle_to_be_added.color(color)
     list_of_turtles.append(turtle_to_be_added)
 
@@ -16,7 +24,6 @@ for color in colors:
 
 
 #Set turtle on positions
-#test
 max_width = -230
 height = 180
 distance = 360 / len(colors)
