@@ -5,10 +5,11 @@ from turtle import Screen, Turtle
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 list_of_turtles = []
 rat_shape = ((0, 0), (0, 10), (-10, 20), (-10, 30), (-5, 35), (-10, 35), (-5, 40), (1, 47), (1, 0))
-
+window_width = 1500
+window_height = 400
 
 screen = Screen()
-screen.setup(width=500, height=400)
+screen.setup(width=window_width, height=window_height)
 screen.register_shape("rat", rat_shape)
 
 
@@ -24,13 +25,14 @@ for color in colors:
 
 
 #Set turtle on positions
-max_width = -230
-height = 180
-distance = 360 / len(colors)
+margin = 20
+x_position_start = (window_width/2) * (-1)
+y_position_start = (window_height/2) - margin
+distance = window_height / len(colors)
 for turtle in list_of_turtles:
     turtle.penup()
-    turtle.goto(x=max_width, y=height)
-    height = height - distance
+    turtle.goto(x=x_position_start, y=y_position_start)
+    y_position_start = y_position_start - distance
 user_bet = screen.textinput(title="Make your bet", prompt="provide turtle color")
 winning_color = ''
 while winning_color == '':
