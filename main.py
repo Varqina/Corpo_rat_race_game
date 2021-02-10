@@ -16,6 +16,7 @@ for color in colors:
 
 
 #Set turtle on positions
+#test
 max_width = -230
 height = 180
 distance = 360 / len(colors)
