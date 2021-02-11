@@ -4,9 +4,16 @@ from tkinter import messagebox
 from turtle import Screen, Turtle
 import functions
 
+#Main menu
+from GUI import StartGui
+
+
+StartGui.run_gui()
+
 screen = Screen()
 root = tkinter.Tk()
 root.withdraw()
+
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 list_of_turtles = []
@@ -20,7 +27,7 @@ end_line = x_position_end - margin
 x_position_start = x_position_end * (-1)
 
 # Prepare running board
-screen.setup(width=window_width, height=window_height, startx=(root.winfo_screenwidth()) * 0.1)
+screen.setup(width=window_width, height=window_height)
 screen.title("Rat Race")
 screen.register_shape("rat", rat_shape)
 screen.tracer(0)
