@@ -3,7 +3,7 @@ import sys
 import PySimpleGUI as sg
 
 import CommonStrings
-from PlayerRatClass import PlayerRat
+from RatClass import RatClass
 
 
 def create_player():
@@ -140,8 +140,8 @@ def create_player():
             window.FindElement('point_value').Update(text_color='red')
         window.FindElement('point_value').Update(free_points)
     window.close()
-    player = PlayerRat(ambitious=ambitious_value, idler=idler_value, intellect=intellect_value, sneaky=sneaky_value,
-                       diligence=diligence_value, helpful=helpful_value, color=color)
+    player = RatClass(ambitious=ambitious_value, idler=idler_value, intellect=intellect_value, sneaky=sneaky_value,
+                      diligence=diligence_value, helpful=helpful_value, color=color)
     return player
 
 

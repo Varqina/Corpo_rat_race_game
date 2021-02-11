@@ -5,6 +5,8 @@ import PySimpleGUI as sg
 from turtle import Screen, Turtle
 import CommonStrings
 import functions
+from RatClass import RatClass
+
 
 class Level1:
     screen = Screen()
@@ -31,13 +33,15 @@ class Level1:
         self.screen.title("Rat Race")
         self.screen.register_shape("rat", self.rat_shape)
         self.screen.tracer(0)
+        functions.draw_end_line(self.rat_length, self.screen)
 
         # load turtles
-        functions.draw_end_line(self.rat_length, self.screen)
-        for turtle in range(5):
-            turtle_to_be_added = Turtle("rat")
-            turtle_to_be_added.color('gray')
-            self.list_of_turtles.append(turtle_to_be_added)
+        for computer_players in range(5):
+            computer_player_to_be_added = RatClass()
+            computer_player_to_be_added.setup_random_parameters()
+            computer_player_to_be_added.turtle = Turtle("rat")
+            computer_player_to_be_added.turtle.color(computer_player_to_be_added.color())
+            self.list_of_turtles.append(computer_player_to_be_added)
         player_turtle = Turtle("rat")
         player_turtle.color(player.color.lower())
         self.list_of_turtles.append(player_turtle)
@@ -56,7 +60,12 @@ class Level1:
         self.screen.tracer(1)
         deadline_lap = 0
         while winning_rat == '':
-            deadline_x_position =((self.window_width / 2) * (-1) - self.margin + deadline_lap)
+            lap_move_list = []
+            deadline_x_position = ((self.window_width / 2) * (-1) - self.margin + deadline_lap)
+            # lottery for event
+            if random.randint(0,10) == 7:
+
+
             for turtle in self.list_of_turtles:
                 turtle.forward(random.randint(0, 5))
                 if turtle.pencolor() == 'red':
