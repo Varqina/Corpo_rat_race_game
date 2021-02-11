@@ -1,3 +1,5 @@
+import sys
+
 import PySimpleGUI as sg
 
 import CommonStrings
@@ -41,8 +43,9 @@ def create_player():
                                      sg.Input(idler_value, key='idler_value', size=(2, 1)),
                                      get_button(r'images\add.png', background, 'add_idler')]]
 
-    layout = [[sg.Text('Player name', font=("MS PGothic", 12)), sg.Input(key='player_name')],
-              [sg.Text('Player color', font=("MS PGothic", 12)), sg.Combo(CommonStrings.color_list, key='color')],
+    layout = [[sg.Text('Player name', font=("MS PGothic", 12), key='name_text'), sg.Input(key='player_name')],
+              [sg.Text('Player color', font=("MS PGothic", 12), key='color_text'),
+               sg.Combo(CommonStrings.color_list, key='color')],
               [sg.Text('Player abilities', font=("MS PGothic", 12))],
               [sg.Text(f'You have', font=("MS PGothic", 10)),
                sg.Text(free_points, text_color='green', font=("MS PGothic", 10), key='point_value'),
@@ -56,9 +59,15 @@ def create_player():
     while True:
         key, values = window.read()
         if key == 'Start':
-            color = values['color']
-            # start game
-            break
+            if validate_form(values):
+                color = values['color']
+                break
+            else:
+                if values['player_name'] == '':
+                    window.FindElement('name_text').Update(text_color='red')
+                if values['color'] == '':
+                    window.FindElement('color_text').Update(text_color='red')
+
         if key == 'add_diligence':
             if free_points > 0:
                 diligence_value += 1
@@ -126,7 +135,7 @@ def create_player():
             window.FindElement('idler_value').Update(idler_value)
 
         if key == sg.WIN_CLOSED or key == 'Exit':
-            break
+            sys.exit()
         if free_points <= 3:
             window.FindElement('point_value').Update(text_color='red')
         window.FindElement('point_value').Update(free_points)
@@ -135,5 +144,12 @@ def create_player():
                        diligence=diligence_value, helpful=helpful_value, color=color)
     return player
 
+
 def get_button(icon, background, key):
     return sg.Button(image_filename=icon, image_size=(20, 20), key=key, button_color=(background, background))
+
+
+def validate_form(values):
+    if values['player_name'] != '' and values['color'] != '':
+        return True
+    return False
