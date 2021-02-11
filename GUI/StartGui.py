@@ -1,3 +1,5 @@
+import sys
+
 import PySimpleGUI as sg
 
 import CommonStrings
@@ -11,9 +13,7 @@ def run_gui():
     while True:
         event, values = window.read()
         if event == 'Start':
-            UserGui.run_gui()
-            # start race
             break
         if event == sg.WIN_CLOSED or event == 'Exit':
-            break
+            sys.exit()
     window.close()

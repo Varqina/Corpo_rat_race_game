@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 
 import CommonStrings
+from PlayerRatClass import PlayerRat
 
 
-def run_gui():
+def create_player():
     background = '#F0F0F0'
     free_points = 10
     diligence_value = 0
@@ -12,6 +13,7 @@ def run_gui():
     ambitious_value = 0
     sneaky_value = 0
     idler_value = 0
+    color = ''
     sg.theme('Default1')
     abilities_column_left_title = [[sg.Text('Diligence', font=("MS PGothic", 12), justification='left')],
                                    [sg.Text('Helpful', font=("MS PGothic", 12), justification='center')],
@@ -40,7 +42,7 @@ def run_gui():
                                      get_button(r'images\add.png', background, 'add_idler')]]
 
     layout = [[sg.Text('Player name', font=("MS PGothic", 12)), sg.Input(key='player_name')],
-              [sg.Text('Player color', font=("MS PGothic", 12)), sg.Combo(CommonStrings.color_list)],
+              [sg.Text('Player color', font=("MS PGothic", 12)), sg.Combo(CommonStrings.color_list, key='color')],
               [sg.Text('Player abilities', font=("MS PGothic", 12))],
               [sg.Text(f'You have', font=("MS PGothic", 10)),
                sg.Text(free_points, text_color='green', font=("MS PGothic", 10), key='point_value'),
@@ -54,6 +56,7 @@ def run_gui():
     while True:
         key, values = window.read()
         if key == 'Start':
+            color = values['color']
             # start game
             break
         if key == 'add_diligence':
@@ -128,7 +131,9 @@ def run_gui():
             window.FindElement('point_value').Update(text_color='red')
         window.FindElement('point_value').Update(free_points)
     window.close()
-
+    player = PlayerRat(ambitious=ambitious_value, idler=idler_value, intellect=intellect_value, sneaky=sneaky_value,
+                       diligence=diligence_value, helpful=helpful_value, color=color)
+    return player
 
 def get_button(icon, background, key):
     return sg.Button(image_filename=icon, image_size=(20, 20), key=key, button_color=(background, background))

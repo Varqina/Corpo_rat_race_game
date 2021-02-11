@@ -47,14 +47,25 @@ def draw_white_squares(start_coordinates):
     turtle.forward(10)
 
 
-def draw_start_line(x_start, rat_length, window_height):
-    start_line = Turtle()
-    start_line.hideturtle()
-    start_line.penup()
-    start_line.goto(x_start + rat_length, window_height / 2)
-    start_line.pendown()
-    start_line.right(90)
-    start_line.forward(window_height)
+def draw_dead_line(x_start, window_height):
+    dead_line = Turtle()
+    dead_line.color('red')
+    dead_line.hideturtle()
+    dead_line.speed('fastest')
+    dead_line.penup()
+    dead_line.goto(x_start, window_height / 2)
+    dead_line.pendown()
+    dead_line.fillcolor("red")
+    dead_line.begin_fill()
+    dead_line.right(90)
+    dead_line.forward(window_height)
+    dead_line.right(90)
+    dead_line.forward(20)
+    dead_line.right(90)
+    dead_line.forward(window_height)
+    dead_line.right(90)
+    dead_line.forward(20)
+    dead_line.end_fill()
 
 
 def draw_end_line(rat_length, screen):
